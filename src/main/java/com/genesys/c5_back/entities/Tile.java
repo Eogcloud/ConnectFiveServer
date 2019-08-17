@@ -1,4 +1,4 @@
-package com.genesys.c5_back;
+package com.genesys.c5_back.entities;
 
 public class Tile {
 	private TileType value;

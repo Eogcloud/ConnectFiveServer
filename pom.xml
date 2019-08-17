@@ -11,8 +11,8 @@
 	<groupId>com.genesys</groupId>
 	<artifactId>c5_back</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>c5_back</name>
+	<description>Connect Five Server</description>
 
 	<properties>
 		<java.version>1.8</java.version>

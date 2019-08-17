@@ -1,4 +1,4 @@
-package com.genesys.c5_back;
+package com.genesys.c5_back.entities;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +12,7 @@ public class GameBoard {
 	private int BOARD_COLUMNS;
 
 	public GameBoard(int rows, int columns) {
-		if ((rows > 0 && columns > 0) && rows == columns) {
+		if (rows > 0 && columns > 0) {
 			this.BOARD_ROWS = rows;
 			this.BOARD_COLUMNS = columns;
 			this.board = initiateBoard(this.board, TileType.EMPTY, BOARD_ROWS, BOARD_COLUMNS);
@@ -21,12 +21,16 @@ public class GameBoard {
 		}
 
 	}
+	
+	public List<Tile> getBoard(){
+		return this.board;
+	}
 
 	private List<Tile> initiateBoard(List<Tile> board, TileType value, int rows, int columns) {
 		return new ArrayList<Tile>(Collections.nCopies((rows * columns), new Tile(value)));
 	}
 
-	private Tile getNewTile(Player player) {
+	private Tile getNewTile(PlayerType player) {
 		if (player == player.ONE) {
 			return new Tile(TileType.PLAYERONE);
 		} else {
@@ -55,7 +59,7 @@ public class GameBoard {
 		return columnVector;
 	}
 
-	public boolean playerMove(Player player, int column) {
+	public boolean playerMove(PlayerType player, int column) {
 		if (gameIsActive && (column < BOARD_COLUMNS)) {
 
 			List<Tile> columnVector = getColumnVector(this.board, column, BOARD_ROWS, BOARD_COLUMNS);
