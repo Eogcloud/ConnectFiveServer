@@ -1,7 +1,7 @@
 # Connect Five Server
 
 ## Introduction
-This repository contains the server side implementation of a connect five gaem. This was written as part of an interview coding challenge for Genesys.
+This repository contains the server side implementation of a connect five game. This was written as part of an interview coding challenge for Genesys.
 
 ## Technology
 The application is simple and uses spring-boot-web-starter as a means to provide a server that exposes REST endpoints to a client for interaction. The game logic is implemented on ther server side. There is no persistency present apart from a singleton instance of a class that encapsulates the game's state.
