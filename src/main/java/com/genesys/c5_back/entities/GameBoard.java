@@ -34,33 +34,34 @@ public class GameBoard {
 		return lowestEmtpyTileIndex;
 	}
 
-	private List<Tile> getColumnVector(Board board, int columnRequested) {
+	private List<Tile> getColumnVector(int columnRequested) {
 		List<Tile> columnVector = new ArrayList<>();
-		int highestColumnIndex = (board.size() - (board.getBoardColumns() - columnRequested));
+		int highestColumnIndex = (this.board.size() - (this.board.getBoardColumns() - columnRequested));
 
-		for (int i = highestColumnIndex; i < columnRequested; i -= board.getBoardRows()) {
-			columnVector.add(board.getTile(i));
+		for (int i = highestColumnIndex; i < columnRequested; i -= this.board.getBoardRows()) {
+			columnVector.add(this.board.getTile(i));
 		}
 
 		return columnVector;
 	}
 
-	public boolean playerMove(Player player, Board board, Integer move) {
-		List<Tile> columnVector = getColumnVector(board, move);
+	public boolean playerMove(Player player, Integer move) {
+		List<Tile> columnVector = getColumnVector(move);
 		int row = getLowestEmptyRow(columnVector);
 
 		if (row != -1) {
 			Tile moveTile = getNewTile(player);
-			return board.setBoardTile(moveTile, row, move);
+			return this.board.setBoardTile(moveTile, row, move);
 		}
 
 		return false;
 	}
 
-	public boolean isGameWon(Player player, Board board) {
+	public boolean isGameWon(Player player) {
 		boolean gameIsWon = false;
 
-		if (horizontalWinCheck(player, board) || verticalWinCheck(player, board) || diagnolWinCheck(player, board))
+		if (horizontalWinCheck(player, this.board) || verticalWinCheck(player, this.board)
+				|| diagnolWinCheck(player, this.board))
 			return !gameIsWon;
 
 		return gameIsWon;
