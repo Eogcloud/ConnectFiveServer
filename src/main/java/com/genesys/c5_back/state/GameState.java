@@ -99,6 +99,6 @@ public class GameState {
 	}
 
 	public boolean playerMove(Player player, Integer column) {
-		return board.playerMove(player, column);
+		return board.playerMove(column, null, player);
 	}
 }

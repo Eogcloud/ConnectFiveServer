@@ -45,16 +45,9 @@ public class GameBoard {
 		return columnVector;
 	}
 
-	public boolean playerMove(Player player, Integer move) {
-		List<Tile> columnVector = getColumnVector(move);
-		int row = getLowestEmptyRow(columnVector);
-
-		if (row != -1) {
-			Tile moveTile = getNewTile(player);
-			return this.board.setBoardTile(row, move, moveTile);
-		}
-
-		return false;
+	public void playerMove(Integer row, Integer column, Player player) {
+		Tile moveTile = getNewTile(player);
+		this.board.setBoardTile(row, column, moveTile);
 	}
 
 	public boolean isGameWon(Player player) {

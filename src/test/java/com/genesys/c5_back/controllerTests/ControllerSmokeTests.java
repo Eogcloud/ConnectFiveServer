@@ -13,7 +13,7 @@ import com.genesys.c5_back.controllers.PlayerController;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RestControllerSmokeTests {
+public class ControllerSmokeTests {
 
 	@Autowired
 	private PlayerController playerController;
