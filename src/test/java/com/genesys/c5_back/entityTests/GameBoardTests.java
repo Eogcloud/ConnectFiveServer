@@ -1,4 +1,4 @@
-package entityTests;
+package com.genesys.c5_back.entityTests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
