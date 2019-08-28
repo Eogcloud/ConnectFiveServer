@@ -1,0 +1,5 @@
+FROM openjdk:12-alpine
+MAINTAINER Eamonn O Broithe
+COPY . /usr/app
+WORKDIR /usr/app
+RUN ls -a && pwd
