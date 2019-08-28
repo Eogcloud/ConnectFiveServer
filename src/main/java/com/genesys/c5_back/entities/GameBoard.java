@@ -39,7 +39,7 @@ public class GameBoard {
 		int highestColumnIndex = (this.board.size() - (this.board.getBoardColumns() - columnRequested));
 
 		for (int i = highestColumnIndex; i < columnRequested; i -= this.board.getBoardRows()) {
-			columnVector.add(this.board.getTile(i));
+			columnVector.add(this.board.getTile(i, null));
 		}
 
 		return columnVector;
@@ -51,7 +51,7 @@ public class GameBoard {
 
 		if (row != -1) {
 			Tile moveTile = getNewTile(player);
-			return this.board.setBoardTile(moveTile, row, move);
+			return this.board.setBoardTile(row, move, moveTile);
 		}
 
 		return false;
@@ -92,7 +92,7 @@ public class GameBoard {
 				if (verticalCounter == 5)
 					return true;
 
-				if (board.getTile(boardIndex).getValue().toString() == player.toString()) {
+				if (board.getTile(boardIndex, null).getValue().toString() == player.toString()) {
 					verticalCounter++;
 				}
 			}

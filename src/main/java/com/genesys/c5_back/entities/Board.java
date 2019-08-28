@@ -14,14 +14,14 @@ public class Board {
 		if (rows.intValue() > 0 && columns.intValue() > 0) {
 			this.BOARD_ROWS = rows;
 			this.BOARDS_COLUMNS = columns;
-			this.board = new ArrayList<Tile>(Collections.nCopies((rows * columns), new Tile(TileType.EMPTY)));
+			this.board = new ArrayList<Tile>(
+					Collections.nCopies((this.BOARD_ROWS * this.BOARDS_COLUMNS), new Tile(TileType.EMPTY)));
 		} else
 			throw new IllegalArgumentException("Invalid Board Size");
 	}
 
-	public boolean setBoardTile(Tile tile, Integer row, Integer column) {
-		if (row.intValue() >= 0 && row.intValue() <= this.BOARD_ROWS && column.intValue() >= 0
-				&& column.intValue() <= this.BOARDS_COLUMNS) {
+	public void setBoardTile(Integer row, Integer column, Tile tile) {
+		if (this.checkValidBoardIndex(row, column)) {
 
 			int index = 0;
 
@@ -30,9 +30,9 @@ public class Board {
 			else
 				index = column.intValue() * row.intValue();
 			this.board.set(index, tile);
-			return true;
-		}
-		return false;
+
+		} else
+			throw new IllegalArgumentException("Column and row indices are out of bounds of the board.");
 	}
 
 	public Integer getBoardRows() {
@@ -47,11 +47,21 @@ public class Board {
 		return this.BOARDS_COLUMNS;
 	}
 
-	public Tile getTile(Integer index) {
-		return this.board.get(index);
+	public Tile getTile(Integer row, Integer column) {
+		if (this.checkValidBoardIndex(row, column))
+			return this.board.get(row * column);
+		else
+			throw new IllegalArgumentException("Column and row indices are out of bounds of the board.");
 	}
 
 	public List<Tile> getBoard() {
 		return this.board;
+	}
+
+	private boolean checkValidBoardIndex(Integer row, Integer column) {
+		if ((row < 0 || row > this.BOARD_ROWS) || (column < 0 || column > this.BOARDS_COLUMNS)) {
+			return false;
+		}
+		return true;
 	}
 }
