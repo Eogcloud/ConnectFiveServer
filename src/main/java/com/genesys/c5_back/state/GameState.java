@@ -98,7 +98,7 @@ public class GameState {
 		return null;
 	}
 
-	public boolean playerMove(Player player, Integer column) {
-		return board.playerMove(column, null, player);
+	public void playerMove(Player player, Integer column) {
+		board.playerMove(column, 0, player);
 	}
 }
