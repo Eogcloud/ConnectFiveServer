@@ -13,8 +13,16 @@ interaction with the gameboard is made possible through the singleton state obje
 
 The REST endpoints expose these operations to the client who can then read from the state object or attempt to modify it.
 
-## Running The Server
+## Building and Running the application
+To run the ConnectFive backend
 
-
+1. Clone the Repository
+   ```
+   $ git clone https://github.com/Eogcloud/ConnectFiveServer.git
+   ```
+2. Build an image out of the Dockerfile within the repository.
+   ```
+   $ docker build . -t connectfivebackend -d
+   ```
 
 
