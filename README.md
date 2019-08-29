@@ -22,7 +22,9 @@ To run the ConnectFive backend
    ```
 2. Build an image out of the Dockerfile within the repository.
    ```
-   $ docker build . -t connectfivebackend -d
+   $ docker build . -t connectfivebackend
    ```
-
-
+3. Run the new image and expose the container ports for requests
+   ```
+   $ docker run connectfivebackend --rm -d -n connectfivebackend -p 8080:8080 
+   ```
