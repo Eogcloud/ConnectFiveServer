@@ -26,7 +26,7 @@ public class GameBoardTests {
 		GameBoard gb = new GameBoard(rows, columns);
 		Player testPlayer = new Player(PlayerType.ONE);
 		gb.playerMove(5, 5, testPlayer);
-		assertEquals(gb.getBoard().get(5 * 5).getValue().toString(), testPlayer.getType().toString());
+		assertEquals(gb.getBoard().get(5 * 5).getType().toString(), testPlayer.getType().toString());
 	}
 
 	@Test(expected = IllegalArgumentException.class)

@@ -43,7 +43,7 @@ public class BoardTests {
 		Board board = new Board(rows, columns);
 		Tile testTile = new Tile(TileType.ONE);
 		board.setBoardTile(5, 5, testTile);
-		assertEquals(board.getTile(5, 5).getValue(), testTile.getValue());
+		assertEquals(board.getTile(5, 5).getType(), testTile.getType());
 	}
 
 	@Test(expected = IllegalArgumentException.class)

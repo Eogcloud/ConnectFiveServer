@@ -1,18 +1,18 @@
 package com.genesys.c5_back.entities;
 
 public class Tile {
-	private TileType value;
+	private TileType type;
 
 	public Tile(TileType type) {
-		this.value = type;
+		this.type = type;
 	}
 
-	public TileType getValue() {
-		return value;
+	public TileType getType() {
+		return type;
 	}
 
 	public void setValue(TileType type) {
-		this.value = type;
+		this.type = type;
 	}
 
 }

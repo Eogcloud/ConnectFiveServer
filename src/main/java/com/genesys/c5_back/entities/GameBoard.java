@@ -27,27 +27,34 @@ public class GameBoard {
 		int lowestEmtpyTileIndex = -1;
 
 		for (int i = 0; i < columnVector.size(); i++) {
-			if (columnVector.get(i).getValue() == TileType.EMPTY) {
+			if (columnVector.get(i).getType() == TileType.EMPTY) {
 				lowestEmtpyTileIndex = i;
 			}
 		}
 		return lowestEmtpyTileIndex;
 	}
 
-	private List<Tile> getColumnVector(int columnRequested) {
+	private List<Tile> getColumnVector(int targetColumn) {
 		List<Tile> columnVector = new ArrayList<>();
-		int highestColumnIndex = (this.board.size() - (this.board.getBoardColumns() - columnRequested));
+		int highestColumnIndex = (this.board.size() - (this.board.getBoardColumns() - targetColumn));
 
-		for (int i = highestColumnIndex; i < columnRequested; i -= this.board.getBoardRows()) {
+		for (int i = highestColumnIndex; i < targetColumn; i -= this.board.getBoardRows()) {
 			columnVector.add(this.board.getTile(i, null));
 		}
 
 		return columnVector;
 	}
 
-	public void playerMove(Integer row, Integer column, Player player) {
-		Tile moveTile = getNewTile(player);
-		this.board.setBoardTile(row, column, moveTile);
+	public void playerMove(Integer column, Player player) {
+		List<Tile> columnVector = this.getColumnVector(column.intValue());
+		int calculatedRow = getLowestEmptyRow(columnVector);
+
+		if (calculatedRow != -1) {
+			Tile moveTile = getNewTile(player);
+			this.board.setBoardTile(calculatedRow, column, moveTile);
+		} else {
+			throw new IllegalArgumentException("That column is already full!");
+		}
 	}
 
 	public boolean isGameWon(Player player) {
@@ -62,6 +69,26 @@ public class GameBoard {
 
 	private boolean diagnolWinCheck(Player player, Board board) {
 
+		final int winCondition = 5;
+		int StartingRow = (board.getBoardRows() - 1) - winCondition;
+		int maxColumnCheck = (board.getBoardColumns() - 1) - winCondition;
+		int counter = 0;
+		String search = player.getType().toString();
+
+		// ascending check
+		for (int i = StartingRow; i >= 0; i--) {
+			for (int j = 0; j < (board.getBoardColumns() - i); i++) {
+				if (board.getTile(i, j).getType().toString() == search) {
+					counter++;
+					if (counter == 5)
+						return true;
+				} else {
+					counter = 0;
+				}
+			}
+		}
+
+		// descending check
 		// TODO
 
 		return false;
@@ -85,7 +112,7 @@ public class GameBoard {
 				if (verticalCounter == 5)
 					return true;
 
-				if (board.getTile(boardIndex, null).getValue().toString() == player.toString()) {
+				if (board.getTile(boardIndex, null).getType().toString() == player.toString()) {
 					verticalCounter++;
 				}
 			}
@@ -99,7 +126,7 @@ public class GameBoard {
 		for (Tile tile : board.getBoard()) {
 			if (horizontalCounter == 5)
 				return true;
-			if (tile.getValue().toString() == player.getType().toString())
+			if (tile.getType().toString() == player.getType().toString())
 				horizontalCounter++;
 		}
 		return false;

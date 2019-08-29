@@ -37,10 +37,14 @@ public class GameController {
 	@RequestMapping(value = "/board/move/{playerNumber}/{column}", method = RequestMethod.POST)
 	public ResponseEntity<Object> playerMove(@PathVariable("PlayerNumber") PlayerType type,
 			@PathVariable("column") int column) {
-		if (state.playerMove(new Player(type), column))
-			return new ResponseEntity<Object>(type + "dropped in" + column, HttpStatus.OK);
 
-		return new ResponseEntity<Object>("invalid move from" + type + "in" + column, HttpStatus.BAD_REQUEST);
+		try {
+			state.playerMove(new Player(type), column);
+		} catch (IllegalArgumentException e) {
+			return new ResponseEntity<Object>("invalid move from" + type + "in" + column, HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<Object>(type + "dropped in" + column, HttpStatus.OK);
 	}
 
 }
